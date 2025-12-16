@@ -8,8 +8,8 @@ import java.net.Socket;
 public class ServidorTCP {
     public static void main(String[] args) {
         try {
-            // Crear un socket de servidor en el puerto 12345
-            ServerSocket serverSocket = new ServerSocket(12345);
+            // Crear un socket de servidor en el puerto 5000
+            ServerSocket serverSocket = new ServerSocket(5000);
             System.out.println("Servidor TCP esperando conexiones...");
 
             // Bucle infinito para aceptar conexiones de clientes

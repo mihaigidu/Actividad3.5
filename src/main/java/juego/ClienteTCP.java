@@ -12,7 +12,7 @@ public class ClienteTCP {
     public static void main(String[] args) {
         try {
             // Conectar al servidor en localhost y puerto 12345
-            Socket socket = new Socket("localhost", 12345);
+            Socket socket = new Socket("localhost", 5000);
             // Preparar para leer datos del servidor
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             // Preparar para enviar datos al servidor
