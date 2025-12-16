@@ -4,24 +4,22 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-// Clase principal para el servidor del juego
 public class ServidorTCP {
     public static void main(String[] args) {
         try {
-            // Crear un socket de servidor en el puerto 5000
-            // Al no especificar IP, Java escucha en 0.0.0.0 (todas las interfaces)
+            // Escuchar en todas las interfaces de red en el puerto 5000
             ServerSocket serverSocket = new ServerSocket(5000);
             System.out.println("Servidor TCP activo en puerto 5000. Esperando conexiones...");
 
-            // Bucle infinito para aceptar conexiones de clientes
+            // Bucle para aceptar clientes de forma continua
             while (true) {
-                // Esperar y aceptar una nueva conexion de cliente
+                // Bloquea hasta que un cliente se conecta
                 Socket clientSocket = serverSocket.accept();
                 System.out.println("Cliente conectado desde: " + clientSocket.getInetAddress());
 
-                // Crear un nuevo hilo para manejar la comunicacion con este cliente
+                // Crea y ejecuta un nuevo hilo para el cliente
                 Thread clientThread = new Thread(new ClientHandler(clientSocket));
-                clientThread.start(); // Iniciar el hilo del cliente
+                clientThread.start();
             }
         } catch (IOException e) {
             e.printStackTrace();
