@@ -9,47 +9,49 @@ import java.util.Scanner;
 
 // Clase principal para el cliente del juego
 public class ClienteTCP {
+    // Definimos la IP y el Puerto como constantes para facilitar cambios
+    private static final String SERVER_IP = "44.197.206.164"; // TU IP DE AWS
+    private static final int SERVER_PORT = 5000;
+
     public static void main(String[] args) {
         try {
-            // Conectar al servidor en localhost y puerto 12345
-            Socket socket = new Socket("localhost", 5000);
-            // Preparar para leer datos del servidor
+            System.out.println("Conectando a " + SERVER_IP + " en el puerto " + SERVER_PORT + "...");
+
+            // Conectar al servidor en la IP de AWS
+            Socket socket = new Socket(SERVER_IP, SERVER_PORT);
+
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            // Preparar para enviar datos al servidor
             PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
-            // Escaner para leer la entrada del usuario desde la consola
             Scanner scanner = new Scanner(System.in);
 
-            // Hilo para escuchar los mensajes del servidor de forma continua
+            // Hilo para escuchar mensajes del servidor
             Thread serverListener = new Thread(() -> {
                 try {
                     String serverResponse;
-                    // Leer y mostrar mensajes del servidor mientras la conexion este activa
                     while ((serverResponse = in.readLine()) != null) {
                         System.out.println(serverResponse);
                     }
                 } catch (IOException e) {
-                    // Informar al usuario si se pierde la conexion con el servidor
-                    System.out.println("Desconectado del servidor.");
+                    System.out.println("Conexión finalizada o interrumpida.");
+                    System.exit(0); // Cerrar el programa si el servidor se desconecta
                 }
             });
-            serverListener.start(); // Iniciar el hilo de escucha
+            serverListener.start();
 
-            // Bucle principal para leer la entrada del usuario y enviarla al servidor
+            // Bucle principal para enviar datos
             while (true) {
-                String userInput = scanner.nextLine(); // Leer linea de la consola
-                out.println(userInput); // Enviar la linea al servidor
-                // Si el usuario escribe "no", terminar el bucle y cerrar el cliente
-                if (userInput.equalsIgnoreCase("no")) {
-                    break;
+                if (scanner.hasNextLine()) {
+                    String userInput = scanner.nextLine();
+                    out.println(userInput);
+                    if (userInput.equalsIgnoreCase("no")) {
+                        break;
+                    }
                 }
             }
-
-            // Cerrar la conexion del socket
             socket.close();
         } catch (IOException e) {
-            // Imprimir cualquier error de entrada/salida que ocurra
-            e.printStackTrace();
+            System.err.println("Error: No se pudo conectar al servidor.");
+            System.err.println("Verifica que la instancia EC2 esté encendida y el puerto 5000 abierto en el Security Group.");
         }
     }
 }
