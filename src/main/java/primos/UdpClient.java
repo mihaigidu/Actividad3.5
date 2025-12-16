@@ -12,7 +12,7 @@ import java.util.Scanner;
 public class UdpClient {
     public static void main(String[] args) {
         String host = "localhost";
-        int port = 9876;
+        int port = 6000;
 
         if (args.length >= 2) {
             host = args[0];
