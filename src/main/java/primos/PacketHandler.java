@@ -3,13 +3,9 @@ package primos;
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
-import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Manejador de paquetes para el calculo de primos.
- */
 public class PacketHandler implements Runnable {
     private DatagramSocket socket;
     private DatagramPacket packet;
@@ -47,9 +43,6 @@ public class PacketHandler implements Runnable {
         }
     }
 
-    /**
-     * Calcula los primos hasta n.
-     */
     private List<Integer> getPrimes(int n) {
         List<Integer> primes = new ArrayList<>();
         if (n >= 2) primes.add(2);
@@ -61,9 +54,6 @@ public class PacketHandler implements Runnable {
         return primes;
     }
 
-    /**
-     * Comprueba si n es primo.
-     */
     private boolean isPrime(int n) {
         if (n <= 1) return false;
         if (n == 2) return true;
