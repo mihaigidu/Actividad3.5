@@ -8,7 +8,7 @@ import java.util.Scanner;
 
 public class UdpClient {
     
-    private static final String SERVER_IP = "34.204.195.59";
+    private static final String SERVER_IP = "98.92.83.174";
     private static final int SERVER_PORT = 6000;
 
     public static void main(String[] args) {

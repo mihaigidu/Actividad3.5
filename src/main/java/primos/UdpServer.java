@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-/**
- * Servidor UDP para el calculo de numeros primos.
- */
 public class UdpServer {
     public static void main(String[] args) {
         int port = 6000;

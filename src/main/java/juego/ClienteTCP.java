@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ClienteTCP {
     // Configuracion de conexion
-    private static final String SERVER_IP = "44.197.206.164"; // TU IP DE AWS
+    private static final String SERVER_IP = "98.92.83.174";
     private static final int SERVER_PORT = 5000;
 
     public static void main(String[] args) {
